@@ -5,144 +5,140 @@ Anyone can verify payment status directly from the blockchain.
 
 ---
 
-## What this dApp does
+## 📖 Overview
+
+PayNProve enables trustless payment verification by recording payments directly on-chain.  
+Once a user pays, anyone can publicly verify that payment without relying on a backend server.
+
+---
+
+## ✨ Features
 
 - Connect wallet using MetaMask
 - Pay a fixed amount of ETH
 - Store payment proof on-chain
-- Verify payment status from frontend
-- Publicly show list of wallets that have paid
-- Only contract owner can withdraw funds
+- Verify payment status from the frontend
+- Publicly display a list of wallets that have paid
+- Only the contract owner can withdraw funds
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
-- Solidity
-- Hardhat
-- Ethers.js
-- Next.js (App Router)
-- React
-- TypeScript
+- **Solidity** – Smart contracts
+- **Hardhat** – Development & testing
+- **Ethers.js** – Blockchain interaction
+- **Next.js (App Router)** – Frontend framework
+- **React**
+- **TypeScript**
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
+```text
 paynprove/
 │
-├── blockchain/ # Smart contracts + Hardhat
-│ ├── contracts/
-│ ├── scripts/
-│ ├── test/
-│ └── hardhat.config.ts
+├── blockchain/          # Smart contracts + Hardhat
+│   ├── contracts/
+│   ├── scripts/
+│   ├── test/
+│   └── hardhat.config.ts
 │
-├── frontend/ # Next.js frontend
-│ ├── app/
-│ ├── constants/
-│ └── package.json
+├── frontend/            # Next.js frontend
+│   ├── app/
+│   ├── constants/
+│   └── package.json
 
+✅ Prerequisites
 
----
+    Node.js v18+ (recommended)
 
-## Prerequisites
+    MetaMask browser extension
 
-- Node.js (v18+ recommended)
-- MetaMask browser extension
-- npm / pnpm / yarn
+    npm / pnpm / yarn
 
----
+🚀 Setup & Run (Local Development)
 
-## 🚀 Setup & Run (Local Development)
+This project has two parts:
 
-The project has **two parts**:
+    blockchain/ → Smart contracts (Hardhat)
 
-- `blockchain/` → Smart contract (Hardhat)
-- `frontend/` → Frontend (Next.js)
+    frontend/ → Frontend (Next.js)
 
----
-
-### 1️⃣ Clone the repository
-
-```bash
-## 🚀 Quick Start
-
-### 1️⃣ Clone and Setup
+1️⃣ Clone the Repository
 
 git clone https://github.com/YOUR_USERNAME/paynprove.git
 cd paynprove
 
-text
+2️⃣ Start Local Blockchain (Hardhat)
 
-### 2️⃣ Start Local Blockchain (Hardhat)
-**Terminal 1:**
+Terminal 1:
 
 cd blockchain
 npx hardhat node
 
-text
+✅ Starts a local Ethereum network at http://127.0.0.1:8545 with funded test accounts.
+⚠️ Keep this terminal running.
+3️⃣ Deploy Smart Contract (Local)
 
-✅ Starts local Ethereum network at http://127.0.0.1:8545 with funded test accounts.
-
-⚠️ **Keep this terminal running.**
-
-### 3️⃣ Deploy Smart Contract (Local)
-**Terminal 2:**
+Terminal 2:
 
 cd blockchain
 npx hardhat run scripts/deploy.ts --network localhost
 
-text
+Example output:
 
-You'll see output like:
+PayNProve deployed to: 0xABC123...
 
-paynprove deployed to: 0xABC123...
-
-text
-
-📌 **Copy this deployed contract address.**
-
-### 4️⃣ Setup Frontend
+📌 Copy this deployed contract address.
+4️⃣ Setup Frontend
 
 cd frontend
 npm install
 
-text
-
-**Update contract constants** (`frontend/constants/contract.ts`):
+Update contract constants in frontend/constants/contract.ts:
 
 export const CONTRACT_ADDRESS = "PASTE_DEPLOYED_ADDRESS_HERE";
-export const CONTRACT_ABI = [...]; // Copy from blockchain/artifacts/ after compilation
+export const CONTRACT_ABI = [...]; // Copy from blockchain/artifacts after compilation
 
-text
-
-### 5️⃣ Run Frontend
+5️⃣ Run the Frontend
 
 npm run dev
 
-text
-
 👉 Open http://localhost:3000
+🧪 How to Use
 
-## 🧪 How to Use
-1. Connect MetaMask
-2. Switch MetaMask to **Hardhat Localhost** (http://127.0.0.1:8545)
-3. Click **Pay 0.01 ETH**
-4. See payment verified on-chain
-5. View list of wallets that have paid
+    Connect MetaMask
+
+    Switch MetaMask to Hardhat Localhost
+    (http://127.0.0.1:8545)
+
+    Click Pay 0.01 ETH
+
+    Payment is recorded and verified on-chain
+
+    View the public list of wallets that have paid
 
 💡 Use different MetaMask accounts to test multiple users.
+🧾 Smart Contract Functions
 
-## 🧾 Smart Contract Functions
-- `pay()` → Accept ETH & record payment
-- `paid(address)` → Check if wallet paid
-- `getPayersCount()` → Total payers
-- `payers(uint)` → Get payer address by index
-- `withdraw()` → Owner withdraws ETH
+    pay() → Accept ETH & record payment
 
-## 📡 Network Support
-- ✅ **Localhost** (Hardhat)
-- 🧪 **Sepolia Testnet** (optional)
+    paid(address) → Check if a wallet has paid
 
-## 📄 License
+    getPayersCount() → Total number of payers
+
+    payers(uint) → Get payer address by index
+
+    withdraw() → Owner withdraws collected ETH
+
+📡 Network Support
+
+    ✅ Localhost (Hardhat)
+
+    🧪 Sepolia Testnet (optional)
+
+📄 License
+
 UNLICENSED
