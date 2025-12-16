@@ -93,12 +93,13 @@ Terminal 2:
 
 Example output:
 
-PayNProve deployed to: 0xABC123...
+    PayNProve deployed to: 0xABC123...
 
 📌 Copy this deployed contract address.
 4️⃣ Setup Frontend
 
     cd frontend
+    
     npm install
 
 Update contract constants in frontend/constants/contract.ts:
