@@ -65,83 +65,84 @@ The project has **two parts**:
 ### 1️⃣ Clone the repository
 
 ```bash
+## 🚀 Quick Start
+
+### 1️⃣ Clone and Setup
+
 git clone https://github.com/YOUR_USERNAME/paynprove.git
 cd paynprove
 
-2️⃣ Start local blockchain (Hardhat)
+text
 
-Open Terminal 1:
+### 2️⃣ Start Local Blockchain (Hardhat)
+**Terminal 1:**
 
 cd blockchain
 npx hardhat node
 
-✅ This starts a local Ethereum network at
-http://127.0.0.1:8545 with funded test accounts.
+text
 
-⚠️ Keep this terminal running.
-3️⃣ Deploy smart contract (local)
+✅ Starts local Ethereum network at http://127.0.0.1:8545 with funded test accounts.
 
-Open Terminal 2:
+⚠️ **Keep this terminal running.**
+
+### 3️⃣ Deploy Smart Contract (Local)
+**Terminal 2:**
 
 cd blockchain
 npx hardhat run scripts/deploy.ts --network localhost
 
-You will see output like:
+text
+
+You'll see output like:
 
 paynprove deployed to: 0xABC123...
 
-📌 Copy this deployed contract address.
-4️⃣ Setup frontend
+text
+
+📌 **Copy this deployed contract address.**
+
+### 4️⃣ Setup Frontend
 
 cd frontend
 npm install
 
-Update contract constants:
+text
 
-// frontend/constants/contract.ts
+**Update contract constants** (`frontend/constants/contract.ts`):
+
 export const CONTRACT_ADDRESS = "PASTE_DEPLOYED_ADDRESS_HERE";
-export const CONTRACT_ABI = [...];
+export const CONTRACT_ABI = [...]; // Copy from blockchain/artifacts/ after compilation
 
-    ABI can be copied from blockchain/artifacts/ after compilation.
+text
 
-5️⃣ Run frontend
+### 5️⃣ Run Frontend
 
 npm run dev
 
-Open in browser:
+text
 
-👉 http://localhost:3000
-🧪 How to Use
+👉 Open http://localhost:3000
 
-    Connect MetaMask
+## 🧪 How to Use
+1. Connect MetaMask
+2. Switch MetaMask to **Hardhat Localhost** (http://127.0.0.1:8545)
+3. Click **Pay 0.01 ETH**
+4. See payment verified on-chain
+5. View list of wallets that have paid
 
-    Switch MetaMask to Hardhat Localhost
+💡 Use different MetaMask accounts to test multiple users.
 
-    Click Pay 0.01 ETH
+## 🧾 Smart Contract Functions
+- `pay()` → Accept ETH & record payment
+- `paid(address)` → Check if wallet paid
+- `getPayersCount()` → Total payers
+- `payers(uint)` → Get payer address by index
+- `withdraw()` → Owner withdraws ETH
 
-    See Payment verified on-chain
+## 📡 Network Support
+- ✅ **Localhost** (Hardhat)
+- 🧪 **Sepolia Testnet** (optional)
 
-    View list of wallets that have paid
-
-Use different MetaMask accounts to test multiple users.
-🧾 Smart Contract Functions
-
-    pay() → Accept ETH & record payment
-
-    paid(address) → Check if a wallet paid
-
-    getPayersCount() → Total payers
-
-    payers(uint) → Get payer address by index
-
-    withdraw() → Owner withdraws ETH
-
-📡 Network Support
-
-    ✅ Localhost (Hardhat)
-
-    🧪 Sepolia Testnet (optional)
-
-📄 License
-
+## 📄 License
 UNLICENSED
