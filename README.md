@@ -29,7 +29,6 @@ Once a user pays, anyone can publicly verify that payment without relying on a b
 - **Hardhat** – Development & testing
 - **Ethers.js** – Blockchain interaction
 - **Next.js (App Router)** – Frontend framework
-- **React**
 - **TypeScript**
 
 ---
@@ -146,4 +145,4 @@ Update contract constants in frontend/constants/contract.ts:
 
 📄 License
 
-UNLICENSED
+    UNLICENSED
