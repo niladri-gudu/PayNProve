@@ -49,6 +49,7 @@ paynprove/
 │   ├── app/
 │   ├── constants/
 │   └── package.json
+```
 
 ✅ Prerequisites
 
