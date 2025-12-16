@@ -1,132 +1,126 @@
-# PayNProve: On-Chain Payment Verification dApp
+# PayNProve
 
-PayNProve is a simple Web3 Decentralized Application (dApp) that allows users to **pay a fixed amount of ETH and prove on-chain that they have paid**.
-
-Anyone can verify a payment status directly from the blockchain, making the process transparent and immutable.
-
----
-
-## 💡 What this dApp Does
-
-* **Wallet Connection:** Users connect their Web3 wallet (e.g., MetaMask).
-* **On-Chain Payment:** Users pay a fixed amount of ETH, which is sent to the smart contract.
-* **Permanent Record:** The smart contract permanently records the payment against the user's wallet address.
-* **Verification:** The frontend verifies the payment status directly on the blockchain.
-* **Public Visibility:** A public list of all paying wallet addresses is visible on the frontend.
-* **Owner Withdrawal:** Only the contract owner is authorized to withdraw the accumulated funds. 
+PayNProve is a simple Web3 dApp that allows users to **pay ETH and prove on-chain that they have paid**.  
+Anyone can verify payment status directly from the blockchain.
 
 ---
 
-## 🛠️ Tech Stack
+## What this dApp does
 
-This project is built using a modern Web3 development stack:
-
-* **Smart Contracts:** [Solidity](https://soliditylang.org/)
-* **Development Environment:** [Hardhat](https://hardhat.org/) (for local blockchain, compilation, and deployment)
-* **Web3 Library:** [Ethers.js](https://docs.ethers.org/) (for interacting with the contract)
-* **Frontend Framework:** [Next.js](https://nextjs.org/) (App Router)
-* **UI Library:** [React](https://reactjs.org/)
-* **Language:** [TypeScript](https://www.typescriptlang.org/)
+- Users connect their wallet (MetaMask)
+- Users pay a fixed amount of ETH
+- Smart contract permanently records payment
+- Frontend verifies payment on-chain
+- List of all paying wallets is publicly visible
+- Only the contract owner can withdraw funds
 
 ---
 
-## 📂 Project Structure
+## Tech Stack
 
-paynprove/ │ ├── blockchain/ # Smart contracts, Hardhat configuration, scripts, and tests │ ├── contracts/ # Your Solidity contract files (.sol) │ ├── scripts/ # Deployment scripts │ ├── test/ # Contract test files │ └── hardhat.config.ts # Hardhat configuration │ ├── frontend/ # Next.js application │ ├── app/ # Main application files (pages, components) │ ├── constants/ # Contract address, ABI, and other constants │ └── package.json
+- Solidity
+- Hardhat (local blockchain & deployment)
+- Ethers.js
+- Next.js (App Router)
+- React
+- TypeScript
+
+---
+
+## Project Structure
+
+paynprove/
+│
+├── blockchain/ # Smart contracts + Hardhat
+│ ├── contracts/
+│ ├── scripts/
+│ ├── test/
+│ └── hardhat.config.ts
+│
+├── frontend/ # Next.js frontend
+│ ├── app/
+│ ├── constants/
+│ └── package.json
 
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
-Before you begin, ensure you have the following installed:
-
-* **Node.js:** (v18+ recommended)
-* **Wallet Extension:** [MetaMask](https://metamask.io/) browser extension
-* **Package Manager:** pnpm / npm / yarn (commands below use `npm`)
+- Node.js (v18+ recommended)
+- MetaMask browser extension
+- pnpm / npm / yarn
 
 ---
 
-## 🚀 Setup & Run (Local Development)
+## Setup & Run (Local)
 
-Follow these steps to set up and run the dApp on a local Hardhat network.
-
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone repository
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/paynprove.git](https://github.com/YOUR_USERNAME/paynprove.git)
+git clone https://github.com/YOUR_USERNAME/paynprove.git
 cd paynprove
 
-2️⃣ Run Local Blockchain
-
-Start a local Hardhat node. This simulates a live blockchain network.
-Bash
+2️⃣ Run local blockchain
 
 cd blockchain
 npx hardhat node
 
-    Note: Keep this terminal window open. It is running your local network.
+Keep this terminal running.
+3️⃣ Deploy smart contract (local)
 
-3️⃣ Deploy Smart Contract
-
-Open a new terminal window and deploy the contract to your running local network.
-Bash
+Open a new terminal:
 
 cd blockchain
 npx hardhat run scripts/deploy.ts --network localhost
 
-❗️ IMPORTANT: Copy the deployed contract address from the terminal output.
-4️⃣ Setup Frontend
-
-Navigate to the frontend directory and install dependencies.
-Bash
+Copy the deployed contract address.
+4️⃣ Setup frontend
 
 cd frontend
-npm install
 
-Now, update the contract details in the frontend:
+Update these files:
 
-Open frontend/constants/contract.ts and replace "YOUR_DEPLOYED_ADDRESS" with the address you copied in the previous step. The CONTRACT_ABI will also need to be pasted here from your Hardhat build artifacts.
-TypeScript
+// constants/contract.ts
+export const CONTRACT_ADDRESS = "YOUR_DEPLOYED_ADDRESS";
+export const CONTRACT_ABI = [...];
 
-// frontend/constants/contract.ts
-
-export const CONTRACT_ADDRESS = "YOUR_DEPLOYED_ADDRESS_HERE"; // PASTE ADDRESS HERE
-export const CONTRACT_ABI = [...]; // PASTE ABI HERE
-
-5️⃣ Run Frontend
-
-Start the Next.js development server:
-Bash
+5️⃣ Run frontend
 
 npm run dev
 
-Open your browser and navigate to:
+Open:
 
 http://localhost:3000
 
-💻 How to Use the dApp
+How to use
 
-    Connect MetaMask: Use the button to connect your MetaMask wallet to the dApp.
+    Connect MetaMask
 
-    Pay ETH: Initiate the payment transaction via the frontend. Confirm the transaction in MetaMask.
+    Pay ETH
 
-    Verify: After the transaction is mined (which is instant on the local network), the dApp will confirm "Payment verified on-chain."
+    See “Payment verified on-chain”
 
-    View Payers: Your wallet address will appear in the public list of paying wallets.
+    View list of wallets that paid
 
-✍️ Smart Contract Features
-Function	Type	Description
-pay()	Payable	Accepts ETH payment and permanently records the payer's address.
-paid(address)	View	Checks and returns a boolean indicating if a specific wallet address has paid.
-getPayersCount()	View	Returns the total number of unique wallets that have paid.
-payers(uint)	View	Allows retrieval of a payer's address by their index in the list.
-withdraw()	Owner-Only	Allows the contract owner to withdraw all accumulated ETH.
+Smart Contract Features
 
-🌐 Network Support
+    pay() → Accepts ETH and records payment
 
-    Localhost: Hardhat development network (Primary Setup).
+    paid(address) → Checks if a wallet paid
 
-📜 License
+    getPayersCount() → Total payers
 
-This project is released under the UNLICENSED designation.
+    payers(uint) → Get payer address by index
+
+    withdraw() → Owner withdraws ETH
+
+Network Support
+
+    Localhost (Hardhat)
+
+    Sepolia Testnet (optional)
+
+License
+
+UNLICENSED
