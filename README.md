@@ -69,17 +69,17 @@ This project has two parts:
 
 1️⃣ Clone the Repository
 
-git clone https://github.com/YOUR_USERNAME/paynprove.git
-
-cd paynprove
+    git clone https://github.com/YOUR_USERNAME/paynprove.git
+    
+    cd paynprove
 
 2️⃣ Start Local Blockchain (Hardhat)
 
 Terminal 1:
 
-cd blockchain
-
-npx hardhat node
+    cd blockchain
+    
+    npx hardhat node
 
 ✅ Starts a local Ethereum network at http://127.0.0.1:8545 with funded test accounts.
 ⚠️ Keep this terminal running.
@@ -87,9 +87,9 @@ npx hardhat node
 
 Terminal 2:
 
-cd blockchain
-
-npx hardhat run scripts/deploy.ts --network localhost
+    cd blockchain
+    
+    npx hardhat run scripts/deploy.ts --network localhost
 
 Example output:
 
@@ -98,18 +98,17 @@ PayNProve deployed to: 0xABC123...
 📌 Copy this deployed contract address.
 4️⃣ Setup Frontend
 
-cd frontend
-
-npm install
+    cd frontend
+    npm install
 
 Update contract constants in frontend/constants/contract.ts:
 
-export const CONTRACT_ADDRESS = "PASTE_DEPLOYED_ADDRESS_HERE";
-export const CONTRACT_ABI = [...]; // Copy from blockchain/artifacts after compilation
+    export const CONTRACT_ADDRESS = "PASTE_DEPLOYED_ADDRESS_HERE";
+    export const CONTRACT_ABI = [...]; // Copy from blockchain/artifacts after compilation
 
 5️⃣ Run the Frontend
 
-npm run dev
+    npm run dev
 
 👉 Open http://localhost:3000
 🧪 How to Use
