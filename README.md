@@ -53,74 +53,101 @@ paynprove/
 
 ---
 
-## Setup & Run (Local)
+## 🚀 Setup & Run (Local Development)
 
-### 1️⃣ Clone repository
+This project is split into **two parts**:
+
+- `blockchain/` → Smart contract (Hardhat)
+- `frontend/` → Next.js frontend
+
+---
+
+### 1️⃣ Clone the repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/paynprove.git
 cd paynprove
 
-2️⃣ Run local blockchain
+2️⃣ Start local blockchain (Hardhat)
+
+Open Terminal 1:
 
 cd blockchain
 npx hardhat node
 
+✅ This starts a local Ethereum network at
+http://127.0.0.1:8545 with funded test accounts.
+
 Keep this terminal running.
 3️⃣ Deploy smart contract (local)
 
-Open a new terminal:
+Open Terminal 2:
 
 cd blockchain
 npx hardhat run scripts/deploy.ts --network localhost
 
-Copy the deployed contract address.
+You will see output like:
+
+paynprove deployed to: 0xABC123...
+
+📌 Copy this deployed contract address — you’ll need it for the frontend.
 4️⃣ Setup frontend
 
 cd frontend
 
-Update these files:
+Update the contract constants:
 
-// constants/contract.ts
-export const CONTRACT_ADDRESS = "YOUR_DEPLOYED_ADDRESS";
+// frontend/constants/contract.ts
+export const CONTRACT_ADDRESS = "PASTE_DEPLOYED_ADDRESS_HERE";
 export const CONTRACT_ABI = [...];
 
+(ABI comes from blockchain/artifacts/ after compilation)
 5️⃣ Run frontend
 
+npm install
 npm run dev
 
-Open:
+Open in browser:
 
-http://localhost:3000
+👉 http://localhost:3000
+🧪 How to Use
 
-How to use
+    Connect MetaMask (use Hardhat Localhost network)
 
-    Connect MetaMask
-
-    Pay ETH
+    Click Pay 0.01 ETH
 
     See “Payment verified on-chain”
 
-    View list of wallets that paid
+    View list of wallets that have paid
 
-Smart Contract Features
+🧠 Notes
 
-    pay() → Accepts ETH and records payment
+    Each wallet can pay only once
 
-    paid(address) → Checks if a wallet paid
+    Payment proof is stored on-chain
+
+    Refreshing the page keeps proof intact
+
+    Use different MetaMask accounts to test multiple users
+
+🧾 Smart Contract Functions
+
+    pay() → Accept ETH & record payment
+
+    paid(address) → Check if a wallet paid
 
     getPayersCount() → Total payers
 
-    payers(uint) → Get payer address by index
+    payers(uint) → Get payer address
 
     withdraw() → Owner withdraws ETH
 
-Network Support
+📡 Network Support
 
-    Localhost (Hardhat)
+    ✅ Localhost (Hardhat)
 
-    Sepolia Testnet (optional)
+    🧪 Sepolia Testnet (optional)
 
-License
+📄 License
 
 UNLICENSED
